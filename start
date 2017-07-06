@@ -1,0 +1,33 @@
+// object to inherit from 
+function Car(yr, mk, mo, vin) {
+    this.yr = yr;
+    this.mk = mk;
+    this.mo = mo;
+    this.vin = vin;
+  }
+
+Car.prototype.store = function(storeNum) {
+  this.storeNum = 'US-' + storeNum;
+  return this.storeNum;
+}
+  
+// car1 and car2 are objects
+var car1 = new Car(2017, 'Chevrolet', 'Impala', '4AJ9E');
+var car2 = new Car(2015, 'Toyota', 'Camry', '8HUY3');
+
+console.log('Car 1 is a ' + car1.yr + ' ' + car1.mk + ' ' + car1.mo + ' with vin: ' + car1.vin + ' at store: ' + car1.store(78));
+console.log('Car 2 is a ' + car2.yr + ' ' + car2.mk + ' ' + car2.mo + ' with vin: ' + car2.vin + ' at store: ' + car2.store(82));
+
+// Car 1 is a 2017 Chevrolet Impala with vin: 4AJ9E at store: US-78
+// Car 2 is a 2015 Toyota Camry with vin: 8HUY3 at store: US-82
+
+// Create a Truck object that inherits properties from the Car object
+function Truck(yr, mk, mo, vin) {
+  Car.call(this, yr, mk, mo, vin);
+}
+
+// ... and methods via the prototype property
+Truck.prototype = new Car();
+
+var truck1 = new Truck(2018, 'Ford', 'F-150', 'UU72P');
+console.log('Truck 1 is a ' + truck1.yr + ' ' + truck1.mk + ' ' + truck1.mo + ' with vin: ' + truck1.vin + ' at store: ' + truck1.store(11));
